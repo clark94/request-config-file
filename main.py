@@ -1,15 +1,14 @@
+import yaml
 import requests as req
-from configparser import ConfigParser
 
-cnf = ConfigParser()
-cnf.read('config.ini')
+with open('test.yaml') as f:
+    data = yaml.load(f, Loader=yaml.FullLoader)
+    
 
-#print(cnf['url']['host'].format('01306001'))
+#print(data['host'].format('01306001'))
 
-req = req.get(cnf['url']['host'].format('01306001'))
+req = req.get(data['host'].format('01306001'))
+info = req.json()
 
-data = req.json()
+print(info['logradouro'])
 
-print('Endereco:' + data['logradouro'])
-
-#getYourAdress('01306001')
